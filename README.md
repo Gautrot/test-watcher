@@ -60,7 +60,7 @@ if [ "$libwatcher_ver" != "13.6" ]; then
     cd /usr/local/lib
     rm libwatcher-c.so.0
     ln -s libwatcher-c.so.0.13.6 libwatcher-c.so.0
-    echo "✅ libwatcher is now in version 0.13.6 !"
+    echo "✅ Downgraded libwatcher to version 0.13.6 successfully!"
     cd /app
 else
     echo "✅ libwatcher is already in version 0.13.6."
