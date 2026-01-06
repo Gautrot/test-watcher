@@ -81,13 +81,13 @@ ln -s libwatcher-c.so.<version> libwatcher-c.so.0
 
 Use this command to monitor Mutagen and see if it is working properly:
 
-- macOS, Linux (Shell/Bash) :
+- macOS, Linux (Shell/Bash):
 
 ```bash
 mutagen sync monitor
 ```
 
-- Windows (Powershell) :
+- Windows (Powershell):
 
 ```powershell
 .\mutagen.exe sync monitor
@@ -96,13 +96,13 @@ mutagen sync monitor
 If not, remove `mutagen.yml.lock` first, then run this command to get its identifier (an ID starting with `sync_` and
 its name is `frankenphp-sync`):
 
-- macOS, Linux (Shell/Bash) :
+- macOS, Linux (Shell/Bash):
 
 ```bash
 mutagen sync list
 ```
 
-- Windows (Powershell) :
+- Windows (Powershell):
 
 ```powershell
 .\mutagen.exe sync list
@@ -110,13 +110,13 @@ mutagen sync list
 
 Then run this command to remove its sync file:
 
-- macOS, Linux (Shell/Bash) :
+- macOS, Linux (Shell/Bash):
 
 ```bash
 mutagen sync terminate <sync_id>
 ```
 
-- Windows (Powershell) :
+- Windows (Powershell):
 
 ```powershell
 .\mutagen.exe sync terminate <sync_id>
