@@ -1,0 +1,8 @@
+sync:
+  defaults:
+    # Configuration par défaut pour toutes les sessions (facultatif)
+    ignore:
+      vcs: false           # n'ignore pas les répertoires de versions (ex: .git, .svn) car composer en a besoin
+  frankenphp-sync:
+    alpha: "."
+    beta: "docker://frankenphp-test/app"

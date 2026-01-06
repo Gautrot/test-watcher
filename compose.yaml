@@ -1,0 +1,50 @@
+
+services:
+###> doctrine/doctrine-bundle ###
+  database:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/postgresql/data:rw
+###< doctrine/doctrine-bundle ###
+  frankenphp-test:
+    container_name: frankenphp-test
+    restart: unless-stopped
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+#      - ./docker/Caddyfile:/etc/frankenphp/Caddyfile
+#      - ./docker/conf.d:/usr/local/etc/php/app.conf.d:ro
+    ports:
+      - name: http
+        target: 80
+        published: 80
+        protocol: tcp
+      - name: https
+        target: 443
+        published: 443
+        protocol: tcp
+      - name: http3
+        target: 443
+        published: 443
+        protocol: udp
+#    extra_hosts:
+#      - host.docker.internal:host-gateway
+#    tty: true
+
+volumes:
+###> doctrine/doctrine-bundle ###
+  database_data:
+###< doctrine/doctrine-bundle ###
+  caddy_data:
+  caddy_config:

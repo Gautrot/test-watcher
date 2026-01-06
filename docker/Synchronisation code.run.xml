@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Synchronisation code" type="PowerShellRunType" factoryName="PowerShell" scriptUrl=".\docker\synchro_code_docker.ps1" commandOptions="-ExecutionPolicy Bypass" workingDirectory="$ProjectFileDir$" executablePath="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe">
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>
