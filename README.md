@@ -1,6 +1,6 @@
 # Test Watcher
 
-This is a test for e-dant's watcher and trying to fix the issue with Mutagen.
+This is a test for e-dant's libwatcher and trying to fix the issue with Mutagen.
 
 ---
 
@@ -48,6 +48,31 @@ Currently, only the second point is working with this log appearing in the conta
 
 ```log
 2026/01/06 21:50:49.993	INFO	frankenphp	filesystem changes detected	{"events": [{"effect_time":"2026-01-06T21:50:49.842465848Z","path_name":"/app/public/index.php","effect_type":"modify","path_type":"file"}]}
+```
+
+To downgrade to version 0.13.6, uncomment the following lines of codes in `docker-entrypoint.sh` then rebuild the Docker image:
+
+```bash
+libwatcher_ver=$(readlink -f /usr/local/lib/libwatcher-c.so.0 | grep -oP 'libwatcher-c\.so\.0\.\K[0-9.]+')
+if [ "$libwatcher_ver" != "13.6" ]; then
+    echo "🔍 The current version of libwatcher is 0.$libwatcher_ver. Downgrading to working version (0.13.6)..."
+    echo "This is a temporary fix for the watcher. It is meant to disapear once watcher works properly with Mutagen."
+    cd /usr/local/lib
+    rm libwatcher-c.so.0
+    ln -s libwatcher-c.so.0.13.6 libwatcher-c.so.0
+    echo "✅ libwatcher is now in version 0.13.6 !"
+    cd /app
+else
+    echo "✅ libwatcher is already in version 0.13.6."
+fi
+```
+
+To switch versions of libwatcher manually, run the following commands in the container:
+
+```bash
+cd /usr/local/lib
+rm libwatcher-c.so.0
+ln -s libwatcher-c.so.<version> libwatcher-c.so.0
 ```
 
 ---

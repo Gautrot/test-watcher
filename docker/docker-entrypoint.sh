@@ -2,7 +2,6 @@
 set -e
 
 #libwatcher_ver=$(readlink -f /usr/local/lib/libwatcher-c.so.0 | grep -oP 'libwatcher-c\.so\.0\.\K[0-9.]+')
-#
 #if [ "$libwatcher_ver" != "13.6" ]; then
 #    echo "🔍 The current version of libwatcher is 0.$libwatcher_ver. Downgrading to working version (0.13.6)..."
 #    echo "This is a temporary fix for the watcher. It is meant to disapear once watcher works properly with Mutagen."
@@ -77,11 +76,6 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
   # Display information about the current project
   # Or about an error in project initialization
   php bin/console -V
-
-#  setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
-#  setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
-#  setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX vendor
-#  setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX vendor
 
   echo "✅ PHP app is ready!"
 fi

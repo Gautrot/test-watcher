@@ -3,14 +3,14 @@ $OutputEncoding = [Console]::OutputEncoding
 
 Write-Host (Get-Location).Path
 
-Write-Host "Waiting for Docker command to be available..."
+Write-Host "Waiting for Docker to be available..."
 while (-not (Get-Command docker -ErrorAction SilentlyContinue))
 {
     Start-Sleep -Seconds 2
 }
 Write-Host "Docker is available."
 
-Write-Host "Waiting for ‘frankenphp-test’ container to run..."
+Write-Host "Waiting for container ‘frankenphp-test’ to run..."
 while ($true)
 {
     $container = docker ps --format "{{.Names}}" | Where-Object { $_ -eq "frankenphp-test" }
