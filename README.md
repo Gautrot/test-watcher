@@ -1,1 +1,100 @@
 # Test Watcher
+
+This is a test for e-dant's watcher and trying to fix the issue with Mutagen.
+
+---
+
+## Table of Content
+
+<!-- TOC -->
+
+* [Environment](#environment)
+* [Run](#run)
+* [Test](#test)
+* [Troubleshoot](#troubleshoot)
+
+<!-- TOC -->
+
+---
+
+## Environment
+
+Tested with the following setup:
+
+- Windows 11
+    - WSL 2
+- Mutagen
+- JetBrains PhpStorm
+- Docker
+    - Docker Desktop (necessary under Windows)
+    - Container (FrankenPHP 1.11.1; PHP 8.4; Debian 13; Symfony 6.4)
+
+---
+
+## Run
+
+1. Build the environment with Docker, only with `compose.yaml`
+2. Run "Synchronisation code" after its containers are running
+3. Wait until `docker-entrypoint.sh` has finished its work
+
+---
+
+## Test
+
+- Try to edit `public/index.php` from the host and see if FrankenPHP saw the changes from there.
+- Try to edit `public/index.php` from the container and see if FrankenPHP saw the changes from there.
+
+Currently, only the second point is working with this log appearing in the container's logs:
+
+```log
+2026/01/06 21:50:49.993	INFO	frankenphp	filesystem changes detected	{"events": [{"effect_time":"2026-01-06T21:50:49.842465848Z","path_name":"/app/public/index.php","effect_type":"modify","path_type":"file"}]}
+```
+
+---
+
+## Troubleshoot
+
+Use this command to monitor Mutagen and see if it is working properly:
+
+- macOS, Linux (Shell/Bash) :
+
+```bash
+mutagen sync monitor
+```
+
+- Windows (Powershell) :
+
+```powershell
+.\mutagen.exe sync monitor
+```
+
+If not, remove `mutagen.yml.lock` first, then run this command to get its identifier (an ID starting with `sync_` and
+its name is `frankenphp-sync`):
+
+- macOS, Linux (Shell/Bash) :
+
+```bash
+mutagen sync list
+```
+
+- Windows (Powershell) :
+
+```powershell
+.\mutagen.exe sync list
+```
+
+Then run this command to remove its sync file:
+
+- macOS, Linux (Shell/Bash) :
+
+```bash
+mutagen sync terminate <sync_id>
+```
+
+- Windows (Powershell) :
+
+```powershell
+.\mutagen.exe sync terminate <sync_id>
+```
+
+Finally, re-run "Synchronisation code".
