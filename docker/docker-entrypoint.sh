@@ -4,7 +4,7 @@ set -e
 #libwatcher_ver=$(readlink -f /usr/local/lib/libwatcher-c.so.0 | grep -oP 'libwatcher-c\.so\.0\.\K[0-9.]+')
 #if [ "$libwatcher_ver" != "13.6" ]; then
 #    echo "🔍 The current version of libwatcher is 0.$libwatcher_ver. Downgrading to working version (0.13.6)..."
-#    echo "This is a temporary fix for the watcher. It is meant to disapear once watcher works properly with Mutagen."
+#    echo "This is a temporary fix for the watcher. It is meant to disappear once libwatcher will work properly with Mutagen."
 #    cd /usr/local/lib
 #    rm libwatcher-c.so.0
 #    ln -s libwatcher-c.so.0.13.6 libwatcher-c.so.0
@@ -56,7 +56,7 @@ done
 echo "✅ Local repository is here!"
 
 while [ -z "$(ls -A /app/bin/console 2>/dev/null)" ]; do
-  echo "⏳ Waiting for the binary '/app/bin/console'."
+  echo "⏳ Waiting for 'bin/console' to be available."
   sleep 10
 done
 
